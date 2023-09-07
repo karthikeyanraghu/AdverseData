@@ -11,6 +11,9 @@ This project is to get the adverse events data related tothe pharm_class_epc ="n
 3) adverse_data_t2.ipynb: This code helps to hit the APIlink and get data related to "nonsteroidal+anti-inflammatory+drug"
 4) adverse_data_t3.ipynb: This code helps to hit the APIlink and get data related to "Thiazide Diuretic"
 5) Notepad readable code.py: This is just the same code as"adverse_data_t3.ipynb" just in notepad readable format for quick reference.
+6) create-job_1.json: Json data to create job for adverse_data_t1.ipynb
+7) create-job_2.json: Json data to create job for adverse_data_t2.ipynb
+8) create-job_3.json: Json data to create job for adverse_data_t3.ipynb
 
 # adverse_data_t1.ipynb -- Description:
 Step1: Provided required URL details and using the requests’function checked whether the connection was established correctly or not. If successful,then extract the data related to "Tumor Necrosis Factor Blocker" andstore it in a data variable.
@@ -21,6 +24,16 @@ Step5: Created Delta table on the fly while writing the datafrom dataframe to Go
 Step6: In the FDA portal based on the interactive chart data, assumed few columns are mainly used for driving the adverse data in terms of analysis. Based on that choose qualification and receivedate columns as partition columns. Additionally, choose safetyreportid column as Primary column for Merge conditions.
 Step7: In the FDA portal it's mentioned as, any history data will get updated anytime. so I used the MERGE operation for daily job.
 Step8: As data grows drastically, we need to make sure the data is stored and accessed effectively. So added the Optimize command at the end of the code.
+
+# Commands to run the create job in Databricks CLI:
+databricks jobs create --json-file create-job_1.json
+databricks jobs create --json-file create-job_2.json
+databricks jobs create --json-file create-job_3.json
+
+# Commands to run the jobs in Databricks CLI:
+databricks jobs run-now --job-id 1
+databricks jobs run-now --job-id 2
+databricks jobs run-now --job-id 3
 
 # Note:
 The adverse_data_t2 and adverse_data_t3 descriptions are similar to adverse_data_t1.ipynb, the only difference is pharm_class_epc values.
