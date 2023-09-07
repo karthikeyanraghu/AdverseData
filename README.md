@@ -16,12 +16,12 @@ This project is to get the adverse events data related tothe pharm_class_epc ="n
 8) create-job_3.json: Json data to create job for adverse_data_t3.ipynb
 
 # adverse_data_t1.ipynb -- Description:
-Step1: Provided required URL details and using the requests’function checked whether the connection was established correctly or not. If successful,then extract the data related to "Tumor Necrosis Factor Blocker" andstore it in a data variable.
-Step2: Store the raw data in bronze S3 location (raw layer),to maintain history and have the raw data for later analysis or Engineeringpurposes.
+Step1: Provided required URL details and using the requests’function checked whether the connection was established correctly or not. If successful,then extract the data related to "Tumor Necrosis Factor Blocker" and store it in a data variable.
+Step2: Store the raw data in bronze S3 location (raw layer),to maintain history and to have the raw data for later analysis or Engineering purposes.
 Step3: Applying various json functions to transform the jsondata to dataframe.
-Step4: In the FDA portal its mentioned as schema is notstatic. So, choose the Delta table to store the data. Additionally, delta tables areSchema free, support acid transactions, highly performance oriented, inbuiltversion control and read older versions of data using time travel functions whichare very much suitable for this use case.
-Step5: Created Delta table on the fly while writing the datafrom dataframe to Gold s3 location (Final layer).
-Step6: In the FDA portal based on the interactive chart data, assumed few columns are mainly used for driving the adverse data in terms of analysis. Based on that choose qualification and receivedate columns as partition columns. Additionally, choose safetyreportid column as Primary column for Merge conditions.
+Step4: In the FDA portal its mentioned as schema is not static. So, choose the Delta table to store the data. Additionally, delta tables are Schema free, support acid transactions, highly performance oriented, inbuilt version control and read older versions of data using time travel functions which are very much suitable for this use case.
+Step5: Created Delta table on the fly while writing the data from dataframe to Gold s3 location (Final layer).
+Step6: In the FDA portal based on the interactive chart data, understood few columns are mainly used for driving the adverse data in terms of analysis. Based on that choose qualification and receivedate columns as partition columns. Additionally, choose safetyreportid column as Primary column for Merge conditions.
 Step7: In the FDA portal it's mentioned as, any history data will get updated anytime. so I used the MERGE operation for daily job.
 Step8: As data grows drastically, we need to make sure the data is stored and accessed effectively. So added the Optimize command at the end of the code.
 
